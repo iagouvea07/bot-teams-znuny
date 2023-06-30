@@ -12,8 +12,8 @@ class EchoBot extends ActivityHandler {
                 switch(replyText){
                     case "create":
                         const url = `http://${process.env.FQDN}/otrs/nph-genericinterface.pl/Webservice/api-v2/session`
-                        const username = process.env.USER
-                        const password = process.env.PASSWORD
+                        const username = process.env.USER_ZNUNY
+                        const password = process.env.PASSWORD_ZNUNY
                         
                         const params = {
                             method: "POST",
