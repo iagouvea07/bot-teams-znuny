@@ -10,7 +10,7 @@ class EchoBot extends ActivityHandler {
                 var replyText = content;
                 
                 switch(replyText){
-                    case "create":
+                    case "faq":
                         const url = `http://${process.env.FQDN}/otrs/nph-genericinterface.pl/Webservice/api-v2/session`
                         const username = process.env.USER_ZNUNY
                         const password = process.env.PASSWORD_ZNUNY
@@ -26,11 +26,12 @@ class EchoBot extends ActivityHandler {
                             })
                         }
 
-                        const response = await axios.post(url, params.body)
-                        const data = response.data
-                        
+                        const sessionResponse = await axios.post(url, params.body)
+                        const data = sessionResponse.data
+
                         console.log(data)
-                        replyText = content.split(' ').map(() => data['SessionID']).join(' ')
+
+                        replyText = `http://${process.env.FQDN}/otrs/index.pl?Action=AgentFAQZoom;ItemID=1;Nav=;OTRSAgentInterface=${content.split(' ').map(() => data['SessionID']).join(' ')}`
                         break;
 
                     default:
